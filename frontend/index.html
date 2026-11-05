@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student File Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+            <path d="M6 6h10"/>
+            <path d="M6 10h10"/>
+            <path d="M6 14h6"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="logo-title">FileVault</h1>
+          <p class="logo-subtitle">AWS Student Portal</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#dashboard" class="nav-item active" data-tab="dashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="7" height="9" x="3" y="3" rx="1"/>
+            <rect width="7" height="5" x="14" y="3" rx="1"/>
+            <rect width="7" height="9" x="14" y="12" rx="1"/>
+            <rect width="7" height="5" x="3" y="16" rx="1"/>
+          </svg>
+          <span>Dashboard</span>
+        </a>
+        <a href="#files" class="nav-item" data-tab="files">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+          <span>All Files</span>
+        </a>
+        <a href="#upload" class="nav-item" data-tab="upload">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          <span>Upload File</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="system-status-box">
+          <div class="status-indicator-row">
+            <span class="status-dot disconnected" id="sidebar-status-dot"></span>
+            <span class="status-text" id="sidebar-status-text">Connecting...</span>
+          </div>
+          <div class="status-detail" id="sidebar-driver-text">Driver: detecting</div>
+        </div>
+
+        <button class="settings-btn" id="open-settings-btn" type="button" aria-label="Configure Backend API">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          <span>API Connection</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Header Bar -->
+      <header class="topbar">
+        <div>
+          <h2 class="page-title" id="page-header-title">Student File Dashboard</h2>
+          <p class="page-subtitle">Manage assignments, documents, and learning resources</p>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="api-badge" id="topbar-api-badge" title="Active Backend API URL">
+            <span class="api-badge-label">API:</span>
+            <span class="api-badge-url" id="topbar-api-url">http://localhost:5000/api</span>
+          </div>
+
+          <button class="btn btn-secondary" id="refresh-btn" type="button">
+            <svg class="refresh-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+              <path d="M21 3v5h-5"/>
+              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+              <path d="M3 21v-5h5"/>
+            </svg>
+            <span>Refresh</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Dashboard Metrics Cards -->
+      <section class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon metric-icon-blue">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+          </div>
+          <div>
+            <div class="metric-label">Total Files</div>
+            <div class="metric-value" id="metric-total-files">0</div>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon metric-icon-green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <ellipse cx="12" cy="5" rx="9" ry="3"/>
+              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+              <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="metric-label">Total Storage Used</div>
+            <div class="metric-value" id="metric-total-size">0 B</div>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon metric-icon-amber">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="20" height="8" x="2" y="2" rx="2" ry="2"/>
+              <rect width="20" height="8" x="2" y="14" rx="2" ry="2"/>
+              <line x1="6" y1="6" x2="6.01" y2="6"/>
+              <line x1="6" y1="18" x2="6.01" y2="18"/>
+            </svg>
+          </div>
+          <div>
+            <div class="metric-label">Storage Driver</div>
+            <div class="metric-value storage-badge" id="metric-storage-driver">LOCAL</div>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon metric-icon-purple">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </div>
+          <div>
+            <div class="metric-label">Backend Status</div>
+            <div class="metric-value health-text" id="metric-backend-status">Checking...</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- File Upload Card -->
+      <section class="card upload-card" id="upload-section">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Upload New File</h3>
+            <p class="card-subtitle">Upload assignments, notes, or media (Max size: 15 MB)</p>
+          </div>
+        </div>
+
+        <div class="upload-dropzone" id="dropzone">
+          <input type="file" id="file-input" class="file-input-hidden" aria-label="Select file to upload">
+          
+          <div class="dropzone-content" id="dropzone-empty-state">
+            <div class="dropzone-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+            </div>
+            <p class="dropzone-text"><strong>Click to browse</strong> or drag and drop your file here</p>
+            <p class="dropzone-hint">Supports documents, PDFs, images, archives, code files, and presentations</p>
+          </div>
+
+          <!-- Staged file info box -->
+          <div class="staged-file-box hidden" id="staged-file-box">
+            <div class="staged-file-info">
+              <div class="file-type-icon" id="staged-file-icon">DOC</div>
+              <div class="staged-file-details">
+                <div class="staged-file-name" id="staged-file-name">filename.txt</div>
+                <div class="staged-file-meta" id="staged-file-meta">0 KB &bull; TXT</div>
+              </div>
+            </div>
+            <button type="button" class="btn-icon" id="remove-file-btn" title="Remove selected file">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Progress Bar Container -->
+        <div class="progress-container hidden" id="upload-progress-container">
+          <div class="progress-meta">
+            <span class="progress-label" id="upload-progress-status">Uploading file...</span>
+            <span class="progress-percent" id="upload-progress-percent">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-bar" id="upload-progress-bar" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div class="upload-actions">
+          <button class="btn btn-primary" id="upload-btn" type="button" disabled>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            <span>Upload File</span>
+          </button>
+          <button class="btn btn-secondary hidden" id="cancel-upload-btn" type="button">Cancel</button>
+        </div>
+      </section>
+
+      <!-- Files Management Table Section -->
+      <section class="card files-card" id="files-section">
+        <div class="card-header files-header">
+          <div>
+            <h3 class="card-title">Uploaded Student Files</h3>
+            <p class="card-subtitle" id="files-count-subtitle">Showing all files</p>
+          </div>
+
+          <div class="files-filter-bar">
+            <div class="search-box">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input type="text" id="file-search-input" placeholder="Search by filename or extension..." aria-label="Search files">
+            </div>
+          </div>
+        </div>
+
+        <!-- File Table Container -->
+        <div class="table-container">
+          <table class="files-table" id="files-table">
+            <thead>
+              <tr>
+                <th scope="col" class="th-file">File Name</th>
+                <th scope="col" class="th-type">Type</th>
+                <th scope="col" class="th-size">Size</th>
+                <th scope="col" class="th-date">Uploaded Date</th>
+                <th scope="col" class="th-actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="files-table-body">
+              <!-- Dynamically rendered by app.js -->
+            </tbody>
+          </table>
+
+          <!-- Empty State: No Files Uploaded -->
+          <div class="empty-state hidden" id="empty-state">
+            <div class="empty-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="12" y1="12" x2="12" y2="18"/>
+                <line x1="9" y1="15" x2="15" y2="15"/>
+              </svg>
+            </div>
+            <h4>No files uploaded yet</h4>
+            <p>Upload your first student file using the upload section above.</p>
+          </div>
+
+          <!-- Empty State: Search Found No Results -->
+          <div class="empty-state hidden" id="empty-search-state">
+            <div class="empty-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+            <h4>No matching files</h4>
+            <p>No uploaded files matched your search query.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-backdrop hidden" id="delete-modal" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h4 id="delete-modal-title">Confirm File Deletion</h4>
+        <button class="modal-close-btn" id="cancel-delete-x" type="button" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this file? This action cannot be undone.</p>
+        <div class="file-to-delete-box" id="delete-target-filename">filename.pdf</div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancel-delete-btn" type="button">Cancel</button>
+        <button class="btn btn-danger" id="confirm-delete-btn" type="button">Delete File</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- API Connection Settings Modal -->
+  <div class="modal-backdrop hidden" id="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settings-modal-title">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h4 id="settings-modal-title">Backend API Configuration</h4>
+        <button class="modal-close-btn" id="cancel-settings-x" type="button" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-description">
+          Configure the base URL of your backend REST API. When deploying to AWS, set this to your Backend EC2 instance public IP.
+        </p>
+        <div class="form-group">
+          <label for="settings-api-input">API Base URL</label>
+          <input type="text" id="settings-api-input" class="form-input" placeholder="http://54.210.120.45:5000/api">
+          <span class="form-hint">Default: <code>http://localhost:5000/api</code></span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="reset-api-btn" type="button">Reset to Default</button>
+        <button class="btn btn-primary" id="save-api-btn" type="button">Save and Connect</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

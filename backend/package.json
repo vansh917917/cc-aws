@@ -1,0 +1,29 @@
+{
+  "name": "student-file-management-backend",
+  "version": "1.0.0",
+  "description": "Backend REST API for Student File Management System supporting Local and S3 storage",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "aws",
+    "s3",
+    "express",
+    "student-file-management",
+    "ec2",
+    "fullstack"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.758.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}
