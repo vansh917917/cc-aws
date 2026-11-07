@@ -407,3 +407,4 @@ This runs integration tests verifying:
 - **Private S3 Bucket**: S3 bucket policies remain private; only the backend interacts with S3.
 - **Directory Traversal Mitigation**: File keys are validated and sanitized to prevent `../` attacks on local storage.
 - **Upload Restrictions**: Dangerous executable types are rejected, and maximum file size is enforced.
+- **CORS Configuration**: Cross-origin resource sharing headers are configured for backend API endpoints.
