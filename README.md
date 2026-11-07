@@ -17,6 +17,7 @@ The target AWS deployment architecture utilizes:
 - **EC2 Instance 2 (Backend)**: Runs the Node.js Express REST API as a background service (e.g., via PM2 or systemd).
 - **Amazon S3 (File Storage)**: Private object storage bucket holding student files.
 - **AWS IAM (Security)**: An IAM Role attached as an Instance Profile to EC2 Instance 2 granting least-privilege permissions to S3 (`PutObject`, `GetObject`, `DeleteObject`, `ListBucket`).
+- **Runtime Environment**: Targeted for Ubuntu 22.04 LTS instances and Node.js 18 LTS.
 
 ---
 
