@@ -1,0 +1,46 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "S3ObjectStoragePermissions",
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:DeleteObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::YOUR_S3_BUCKET_NAME",
+        "arn:aws:s3:::YOUR_S3_BUCKET_NAME/*"
+      ]
+    },
+    {
+      "Sid": "SimpleDBMetadataPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "sdb:CreateDomain",
+        "sdb:DeleteDomain",
+        "sdb:DomainMetadata",
+        "sdb:ListDomains",
+        "sdb:PutAttributes",
+        "sdb:GetAttributes",
+        "sdb:DeleteAttributes",
+        "sdb:Select"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "CloudWatchMetricsAndLogsPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "cloudwatch:PutMetricData",
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:DescribeLogStreams"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

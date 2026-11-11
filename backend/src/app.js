@@ -4,6 +4,7 @@ import { env, validateConfig } from './config/env.js';
 import healthRoutes from './routes/healthRoutes.js';
 import fileRoutes from './routes/fileRoutes.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import { cloudwatchService } from './config/cloudwatchService.js';
 
 validateConfig();
 
@@ -29,7 +30,16 @@ app.use((req, res, next) => {
   const start = Date.now();
   res.on('finish', () => {
     const duration = Date.now() - start;
-    console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl} ${res.statusCode} (${duration}ms)`);
+    const logLine = `${req.method} ${req.originalUrl} ${res.statusCode} (${duration}ms)`;
+    console.log(`[${new Date().toISOString()}] ${logLine}`);
+
+    if (env.ENABLE_CLOUDWATCH) {
+      cloudwatchService.putMetric('ApiRequestCount', 1, 'Count');
+      cloudwatchService.putMetric('ApiRequestLatency', duration, 'Milliseconds');
+      if (req.originalUrl !== '/api/health') {
+        cloudwatchService.sendLog(logLine, res.statusCode >= 400 ? 'WARN' : 'INFO');
+      }
+    }
   });
   next();
 });

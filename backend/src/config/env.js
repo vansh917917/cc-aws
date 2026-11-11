@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load .env from backend root
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 export const env = {
@@ -18,7 +17,13 @@ export const env = {
   AWS_REGION: process.env.AWS_REGION || 'us-east-1',
   AWS_S3_BUCKET_NAME: process.env.AWS_S3_BUCKET_NAME || '',
   CORS_ORIGIN: process.env.CORS_ORIGIN || '*',
-  MAX_FILE_SIZE_MB: parseInt(process.env.MAX_FILE_SIZE_MB, 10) || 15
+  MAX_FILE_SIZE_MB: parseInt(process.env.MAX_FILE_SIZE_MB, 10) || 15,
+  ENABLE_SIMPLEDB: process.env.ENABLE_SIMPLEDB === 'true',
+  AWS_SIMPLEDB_DOMAIN: process.env.AWS_SIMPLEDB_DOMAIN || 'student_files_metadata',
+  ENABLE_CLOUDWATCH: process.env.ENABLE_CLOUDWATCH === 'true',
+  CLOUDWATCH_LOG_GROUP: process.env.CLOUDWATCH_LOG_GROUP || '/aws/student-file-manager/backend',
+  CLOUDWATCH_METRIC_NAMESPACE: process.env.CLOUDWATCH_METRIC_NAMESPACE || 'StudentFileManager',
+  INSTANCE_ID: process.env.INSTANCE_ID || 'ec2-instance'
 };
 
 export function validateConfig() {

@@ -1,25 +1,33 @@
 /**
  * Frontend Configuration for Student File Management System
  * 
- * When deploying to AWS:
- * - Update DEFAULT_API_BASE to your Backend EC2 instance public IP or DNS.
- *   Example: 'http://54.210.120.45:5000/api' or 'https://api.yourdomain.com/api'
- * - In local development: 'http://localhost:5000/api'
- * 
- * Note: You can also override the API URL directly in the UI via the
- * "API Endpoint" settings button without modifying this file.
+ * Supports:
+ * - Localhost development (defaults to http://localhost:5000/api)
+ * - AWS Load Balancer deployment (automatically routes to /api on the same host)
+ * - Manual override in the UI via the API Connection button
  */
 
-const DEFAULT_API_BASE = 'http://localhost:5000/api';
+function resolveDefaultApiBase() {
+  if (typeof window !== 'undefined' && window.location && window.location.origin) {
+    if (window.location.protocol.startsWith('http')) {
+      // If served via Nginx behind an ALB or on an EC2 instance, /api routes directly
+      if (window.location.port !== '5500' && window.location.port !== '3000' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        return `${window.location.origin}/api`;
+      }
+    }
+  }
+  return 'http://localhost:5000/api';
+}
+
+const DEFAULT_API_BASE = resolveDefaultApiBase();
 
 window.APP_CONFIG = {
-  // Return user-overridden URL from browser storage or the configured default
   getApiBaseUrl() {
     const saved = localStorage.getItem('STUDENT_FILES_API_BASE');
     if (saved && saved.trim() !== '') {
       return saved.trim().replace(/\/+$/, '');
     }
-    return (window.__API_BASE_URL__ || DEFAULT_API_BASE).replace(/\/+$/, '');
+    return (window.__API_BASE_URL__ || resolveDefaultApiBase()).replace(/\/+$/, '');
   },
 
   setApiBaseUrl(url) {
