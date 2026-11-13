@@ -8,14 +8,14 @@ This document outlines the four-way division of technical responsibilities, unde
 
 | Member | Assigned Focus Area | Owned AWS Services | Key Deliverable |
 | :--- | :--- | :--- | :--- |
-| **Vansh** | Architecture, Security & Object Storage | **IAM**, **Amazon S3** | Least-privilege IAM Role/Policy, S3 Bucket configuration, System Architecture design |
-| **Sudhanshu** | Compute, Block Storage & NoSQL Metadata | **Amazon EC2**, **Amazon EBS**, **Amazon SimpleDB** | Security Groups, EC2 Launch, gp3 EBS setup, SimpleDB metadata domain & indexing |
+| **Sudhanshu** | Architecture, Security & Object Storage | **IAM**, **Amazon S3** | Least-privilege IAM Role/Policy, S3 Bucket configuration, System Architecture design |
+| **Vansh** | Compute, Block Storage & NoSQL Metadata | **Amazon EC2**, **Amazon EBS**, **Amazon SimpleDB** | Security Groups, EC2 Launch, gp3 EBS setup, SimpleDB metadata domain & indexing |
 | **Sanjana** | Full-Stack Server & Service Deployment | **EC2 Application Layer** (Nginx, Node.js, PM2) | Frontend deployment on EC2 #1 & #2, Backend API deployment under PM2 on EC2 #3 & #4 |
 | **Shalini** | Ingress Traffic Routing & Observability | **Application Load Balancer (ALB)**, **Amazon CloudWatch** | Dual Target Groups, ALB path routing (`/api*`), CloudWatch Logs, Metrics & Alarms |
 
 ---
 
-## Member 1: Vansh
+## Member 1: Sudhanshu
 ### Focus: System Architecture, IAM Security, and Amazon S3 Object Storage
 
 ### 1. Underlying Cloud Concepts
@@ -46,7 +46,7 @@ This document outlines the four-way division of technical responsibilities, unde
 
 ---
 
-## Member 2: Sudhanshu
+## Member 2: Vansh
 ### Focus: Virtual Compute (EC2), Block Storage (EBS), and NoSQL Metadata (SimpleDB)
 
 ### 1. Underlying Cloud Concepts
@@ -119,6 +119,7 @@ This document outlines the four-way division of technical responsibilities, unde
      sudo rm -rf /var/www/html/*
      git clone https://github.com/vansh917917/cc-aws.git /tmp/cc-aws
      sudo cp -r /tmp/cc-aws/frontend/* /var/www/html/
+     rm -rf /tmp/cc-aws
      sudo systemctl restart nginx
      ```
 

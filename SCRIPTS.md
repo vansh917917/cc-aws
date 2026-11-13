@@ -8,15 +8,15 @@ This document contains word-for-word speaking scripts, slide cues, speaker trans
 
 | Speaker | Section | Target Time | Key AWS Services Covered |
 | :--- | :--- | :--- | :--- |
-| **Vansh** | Introduction, System Architecture & Storage Security | 2.5 - 3.0 min | **IAM**, **Amazon S3** |
-| **Sudhanshu** | Compute Infrastructure, EBS & NoSQL Metadata | 2.5 - 3.0 min | **Amazon EC2**, **Amazon EBS**, **Amazon SimpleDB** |
+| **Sudhanshu** | Introduction, System Architecture & Storage Security | 2.5 - 3.0 min | **IAM**, **Amazon S3** |
+| **Vansh** | Compute Infrastructure, EBS & NoSQL Metadata | 2.5 - 3.0 min | **Amazon EC2**, **Amazon EBS**, **Amazon SimpleDB** |
 | **Sanjana** | Full-Stack Application Deployment & High Availability | 2.5 - 3.0 min | **Nginx Web Tier**, **Node.js API & PM2** |
 | **Shalini** | Ingress Traffic Routing, Telemetry & Live Demo | 3.0 - 3.5 min | **Application Load Balancer**, **Amazon CloudWatch** |
 | **Total** | Full Group Presentation & Live Demonstration | **11 - 12.5 min** | **All 7 AWS Services** |
 
 ---
 
-## Speaker 1: Vansh
+## Speaker 1: Sudhanshu
 ### Focus: Project Introduction, Architecture Strategy, IAM Security, and Amazon S3
 
 #### [Screen / Slide Cue: Project Title & High-Level Architecture Diagram]
@@ -39,9 +39,9 @@ This document contains word-for-word speaking scripts, slide cues, speaker trans
 > 
 > Second, for file storage, we provisioned an **Amazon S3 bucket** named `student-files-storage-vansh-2026`. Unlike local instance storage, S3 provides eleven nines of data durability and infinite scale. We configured the bucket with 'Block all public access' enabled, ensuring that students can never access or scrape files directly from S3. Every upload, download, and delete request must authenticate through our backend API.
 > 
-> Now, to explain how our virtual compute instances, block storage, and metadata indexing were engineered, I will hand over to Sudhanshu."
+> Now, to explain how our virtual compute instances, block storage, and metadata indexing were engineered, I will hand over to Vansh."
 
-#### Potential Teacher Viva Questions for Vansh:
+#### Potential Teacher Viva Questions for Sudhanshu:
 - **Q: Why not just store the files on the EC2 hard drive?**
   - *Answer:* EC2 instance storage is tied to a single machine. If a user uploads on server 1, server 2 cannot see that file. Furthermore, EC2 instances are ephemeral. If an instance terminates, the files are lost. S3 decouples storage from compute.
 - **Q: How does the backend talk to S3 without AWS access keys in `.env`?**
@@ -49,14 +49,14 @@ This document contains word-for-word speaking scripts, slide cues, speaker trans
 
 ---
 
-## Speaker 2: Sudhanshu
+## Speaker 2: Vansh
 ### Focus: Virtual Compute (EC2), Block Storage (EBS), and NoSQL Metadata (SimpleDB)
 
 #### [Screen / Slide Cue: EC2 Console, Security Groups, SimpleDB Architecture]
 
 **Spoken Script:**
 
-> "Thank you, Vansh. 
+> "Thank you, Sudhanshu. 
 > 
 > My responsibility was architecting the compute infrastructure, persistent block storage, and the NoSQL metadata layer.
 > 
@@ -78,7 +78,7 @@ This document contains word-for-word speaking scripts, slide cues, speaker trans
 > 
 > I will now pass the presentation to Sanjana to explain how our full-stack application code was deployed and managed across these servers."
 
-#### Potential Teacher Viva Questions for Sudhanshu:
+#### Potential Teacher Viva Questions for Vansh:
 - **Q: What is the difference between EBS and S3?**
   - *Answer:* EBS is block storage mounted directly as a virtual hard drive for the operating system and running processes. S3 is object storage accessed over HTTP through an API, designed for unstructured files like PDFs and images.
 - **Q: Why use SimpleDB instead of a traditional relational database like MySQL?**
@@ -93,7 +93,7 @@ This document contains word-for-word speaking scripts, slide cues, speaker trans
 
 **Spoken Script:**
 
-> "Thank you, Sudhanshu.
+> "Thank you, Vansh.
 > 
 > My focus was deploying, configuring, and supervising the full-stack software application across all four EC2 instances.
 > 
