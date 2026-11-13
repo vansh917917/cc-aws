@@ -9,8 +9,8 @@ This document outlines the four-way division of technical responsibilities, unde
 | Member | Assigned Focus Area | Owned AWS Services | Key Deliverable |
 | :--- | :--- | :--- | :--- |
 | **Sudhanshu** | Architecture, Security & Object Storage | **IAM**, **Amazon S3** | Least-privilege IAM Role/Policy, S3 Bucket configuration, System Architecture design |
-| **Vansh** | Compute, Block Storage & NoSQL Metadata | **Amazon EC2**, **Amazon EBS**, **Amazon SimpleDB** | Security Groups, EC2 Launch, gp3 EBS setup, SimpleDB metadata domain & indexing |
-| **Sanjana** | Full-Stack Server & Service Deployment | **EC2 Application Layer** (Nginx, Node.js, PM2) | Frontend deployment on EC2 #1 & #2, Backend API deployment under PM2 on EC2 #3 & #4 |
+| **Sanjana** | Compute, Block Storage & NoSQL Metadata | **Amazon EC2**, **Amazon EBS**, **Amazon SimpleDB** | Security Groups, EC2 Launch, gp3 EBS setup, SimpleDB metadata domain & indexing |
+| **Vansh** | Full-Stack Server & Service Deployment | **EC2 Application Layer** (Nginx, Node.js, PM2) | Frontend deployment on EC2 #1 & #2, Backend API deployment under PM2 on EC2 #3 & #4 |
 | **Shalini** | Ingress Traffic Routing & Observability | **Application Load Balancer (ALB)**, **Amazon CloudWatch** | Dual Target Groups, ALB path routing (`/api*`), CloudWatch Logs, Metrics & Alarms |
 
 ---
@@ -46,7 +46,7 @@ This document outlines the four-way division of technical responsibilities, unde
 
 ---
 
-## Member 2: Vansh
+## Member 2: Sanjana
 ### Focus: Virtual Compute (EC2), Block Storage (EBS), and NoSQL Metadata (SimpleDB)
 
 ### 1. Underlying Cloud Concepts
@@ -80,7 +80,7 @@ This document outlines the four-way division of technical responsibilities, unde
 
 ---
 
-## Member 3: Sanjana
+## Member 3: Vansh
 ### Focus: Application Deployment, Web Server (Nginx), and Process Management (Node.js & PM2)
 
 ### 1. Underlying Cloud Concepts

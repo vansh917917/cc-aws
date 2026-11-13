@@ -9,8 +9,8 @@ This document contains word-for-word speaking scripts, slide cues, speaker trans
 | Speaker | Section | Target Time | Key AWS Services Covered |
 | :--- | :--- | :--- | :--- |
 | **Sudhanshu** | Introduction, System Architecture & Storage Security | 2.5 - 3.0 min | **IAM**, **Amazon S3** |
-| **Vansh** | Compute Infrastructure, EBS & NoSQL Metadata | 2.5 - 3.0 min | **Amazon EC2**, **Amazon EBS**, **Amazon SimpleDB** |
-| **Sanjana** | Full-Stack Application Deployment & High Availability | 2.5 - 3.0 min | **Nginx Web Tier**, **Node.js API & PM2** |
+| **Sanjana** | Compute Infrastructure, EBS & NoSQL Metadata | 2.5 - 3.0 min | **Amazon EC2**, **Amazon EBS**, **Amazon SimpleDB** |
+| **Vansh** | Full-Stack Application Deployment & High Availability | 2.5 - 3.0 min | **Nginx Web Tier**, **Node.js API & PM2** |
 | **Shalini** | Ingress Traffic Routing, Telemetry & Live Demo | 3.0 - 3.5 min | **Application Load Balancer**, **Amazon CloudWatch** |
 | **Total** | Full Group Presentation & Live Demonstration | **11 - 12.5 min** | **All 7 AWS Services** |
 
@@ -39,7 +39,7 @@ This document contains word-for-word speaking scripts, slide cues, speaker trans
 > 
 > Second, for file storage, we provisioned an **Amazon S3 bucket** named `student-files-storage-vansh-2026`. Unlike local instance storage, S3 provides eleven nines of data durability and infinite scale. We configured the bucket with 'Block all public access' enabled, ensuring that students can never access or scrape files directly from S3. Every upload, download, and delete request must authenticate through our backend API.
 > 
-> Now, to explain how our virtual compute instances, block storage, and metadata indexing were engineered, I will hand over to Vansh."
+> Now, to explain how our virtual compute instances, block storage, and metadata indexing were engineered, I will hand over to Sanjana."
 
 #### Potential Teacher Viva Questions for Sudhanshu:
 - **Q: Why not just store the files on the EC2 hard drive?**
@@ -49,7 +49,7 @@ This document contains word-for-word speaking scripts, slide cues, speaker trans
 
 ---
 
-## Speaker 2: Vansh
+## Speaker 2: Sanjana
 ### Focus: Virtual Compute (EC2), Block Storage (EBS), and NoSQL Metadata (SimpleDB)
 
 #### [Screen / Slide Cue: EC2 Console, Security Groups, SimpleDB Architecture]
@@ -76,9 +76,9 @@ This document contains word-for-word speaking scripts, slide cues, speaker trans
 > 
 > This gives us a dedicated NoSQL catalog that allows instant queries using SQL-like syntax such as `select * from student_files_metadata`.
 > 
-> I will now pass the presentation to Sanjana to explain how our full-stack application code was deployed and managed across these servers."
+> I will now pass the presentation to Vansh to explain how our full-stack application code was deployed and managed across these servers."
 
-#### Potential Teacher Viva Questions for Vansh:
+#### Potential Teacher Viva Questions for Sanjana:
 - **Q: What is the difference between EBS and S3?**
   - *Answer:* EBS is block storage mounted directly as a virtual hard drive for the operating system and running processes. S3 is object storage accessed over HTTP through an API, designed for unstructured files like PDFs and images.
 - **Q: Why use SimpleDB instead of a traditional relational database like MySQL?**
@@ -86,14 +86,14 @@ This document contains word-for-word speaking scripts, slide cues, speaker trans
 
 ---
 
-## Speaker 3: Sanjana
+## Speaker 3: Vansh
 ### Focus: Application Deployment, Nginx Web Server, Node.js API, and PM2 Process Supervision
 
 #### [Screen / Slide Cue: Terminal Sessions, PM2 Status, Frontend Dashboard]
 
 **Spoken Script:**
 
-> "Thank you, Vansh.
+> "Thank you, Sanjana.
 > 
 > My focus was deploying, configuring, and supervising the full-stack software application across all four EC2 instances.
 > 
@@ -111,7 +111,7 @@ This document contains word-for-word speaking scripts, slide cues, speaker trans
 > 
 > At this stage, however, our frontend and backend were on separate IP addresses. To demonstrate how we unified these instances under one URL and set up system observability, I hand over to Shalini."
 
-#### Potential Teacher Viva Questions for Sanjana:
+#### Potential Teacher Viva Questions for Vansh:
 - **Q: What is the role of PM2? Why not run node in the background using `nohup` or `&`?**
   - *Answer:* `nohup` does not restart the process if it crashes with an uncaught exception, nor does it automatically revive the application upon system reboot. PM2 manages process lifecycle, restarts crashed workers, and integrates with Linux systemd.
 - **Q: What does the `/api/health` endpoint do?**
@@ -126,7 +126,7 @@ This document contains word-for-word speaking scripts, slide cues, speaker trans
 
 **Spoken Script:**
 
-> "Thank you, Sanjana.
+> "Thank you, Vansh.
 > 
 > My responsibility was engineering the traffic ingress layer using an **Application Load Balancer (ALB)** and establishing full observability using **Amazon CloudWatch**.
 > 
